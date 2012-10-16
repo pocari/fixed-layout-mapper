@@ -38,7 +38,7 @@ Layout definition is started in `define_layout' method.
       definitions...
     end
 
-Columns is defined by `col' method.
+Columns are defined by `col' method.
 
     col symbol, record_def
 
