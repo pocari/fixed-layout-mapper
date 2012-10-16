@@ -105,7 +105,7 @@ You can also use sub layout in array def.
     #=> #<struct f1=["0", #<struct sub_f1="1", sub_f2="23"]>
 
 you can use sub layout in map method.  
-if symbol is set to the second argument in map method, use its layout.
+if symbol is passed to the second argument in map method, use its layout.
 
     mapper = FixedLayoutMapper::Mapper.define_layout do
       layout :sub1 do
