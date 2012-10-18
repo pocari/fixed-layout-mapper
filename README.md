@@ -121,7 +121,7 @@ if symbol is passed to the second argument in map method, use its layout.
     #=> #<struct sub_f1="0", sub_f2="12">
 
 
-Convertion
+Conversion 
 ----
 
 If col method is given block, the pre-convert value is passed to the block and  
