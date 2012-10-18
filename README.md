@@ -32,13 +32,13 @@ Detail
 
 Define columns
 ----
-Layout definition is started in `define_layout' method.
+Layout definition is started in "define_layout" method.
 
     mapper = FixedLayoutMapper::Mapper.define_layout do
       definitions...
     end
 
-Columns are defined by `col' method.
+Columns are defined by "col" method.
 
     col symbol, record_def
 
@@ -70,7 +70,7 @@ record_def is
 Sub layout
 ----
 
-if you want to name to layout, you can use `layout' method.  
+if you want to name to layout, you can use "layout" method.  
 A field defined by "col" method called outside the block of "layout" method  is implicitly defined in the default layout.
 
     layout layout_name(symbol) do
