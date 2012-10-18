@@ -70,9 +70,9 @@ record_def is
 Sub layout
 ----
 
-A col method call in top level is implicitly defined in default layout.  
-if you want to name to layout, you can use `layout' method.
-    
+if you want to name to layout, you can use `layout' method.  
+A field defined by "col" method called outside the block of "layout" method  is implicitly defined in the default layout.
+
     layout layout_name(symbol) do
         column definitions...
     end
