@@ -124,7 +124,7 @@ if symbol is passed to the second argument in map method, use its layout.
 Conversion 
 ----
 
-If col method is given block, the pre-convert value is passed to the block and  
+If "col" method is given block, the raw value is passed to the block and
 the field value becomes the return value of the block.
 
     mapper = FixedLayoutMapper::Mapper.define_layout do
