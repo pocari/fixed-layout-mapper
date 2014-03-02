@@ -1,3 +1,8 @@
+Description
+====
+
+fixed_layout_mapper is a library that maps to RubyObject from fixed-length data.
+
 Sample
 ====
     require 'pp'
