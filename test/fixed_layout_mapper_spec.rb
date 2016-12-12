@@ -1,4 +1,3 @@
-#coding: Windows-31J
 
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__) + '/../lib')
 require File.expand_path(File.dirname(__FILE__) + '/../lib/fixed-layout-mapper')
@@ -13,17 +12,17 @@ describe FixedLayoutMapper::Mapper do
     ary.join
   end
   
-  it "ƒTƒCƒYŽw’è‚ÅƒJƒ‰ƒ€‚ð’è‹`‚Å‚«‚é‚±‚Æ" do
+  it "ã‚µã‚¤ã‚ºæŒ‡å®šã§ã‚«ãƒ©ãƒ ã‚’å®šç¾©ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       col :field1, 2
       col :field2, 1
     end
     rt = mapper.map(%w(12 3).join)
-    rt.field1.should == "12"
-    rt.field2.should == "3"
+    expect(rt.field1).to eq "12"
+    expect(rt.field2).to eq "3"
   end
   
-  it "ƒTƒCƒY‚Ì”z—ñ‚ÅƒJƒ‰ƒ€‚ð’è‹`‚·‚é‚Æ‚»‚ÌŒ…‚Å•ªŠ„‚³‚ê‚½”z—ñ‚É‚È‚é‚±‚Æ" do
+  it "ã‚µã‚¤ã‚ºã®é…åˆ—ã§ã‚«ãƒ©ãƒ ã‚’å®šç¾©ã™ã‚‹ã¨ãã®æ¡ã§åˆ†å‰²ã•ã‚ŒãŸé…åˆ—ã«ãªã‚‹ã“ã¨" do
     mapper = define_layout do
       col :f1, 2
       col :f2, [1, 2, 3]
@@ -31,12 +30,12 @@ describe FixedLayoutMapper::Mapper do
     end
     
     rt = mapper.map(%w(12 a bb ccc 1234 5678).join)
-    rt.f1.should == "12"
-    rt.f2.should == %w(a bb ccc)
-    rt.f3.should == %w(1234 5678)
+    expect(rt.f1).to eq "12"
+    expect(rt.f2).to eq %w(a bb ccc)
+    expect(rt.f3).to eq %w(1234 5678)
   end
   
-  it "ƒŒƒCƒAƒEƒg‚É–¼‘O‚ð‚Â‚¯‚ç‚ê‚é‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«åå‰ã‚’ã¤ã‘ã‚‰ã‚Œã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f1, 2
@@ -44,20 +43,20 @@ describe FixedLayoutMapper::Mapper do
       end
     end
     rt = mapper.map(%w(12 3).join, :layout1)
-    rt.f1.should == "12"
-    rt.f2.should == "3"
+    expect(rt.f1).to eq "12"
+    expect(rt.f2).to eq "3"
   end
   
-  it "ƒŒƒCƒAƒEƒg–¼‚ðŽw’è‚µ‚Ä‚¢‚È‚¢ê‡:default_layout‚Å’è‹`‚³‚ê‚Ä‚¢‚é‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆåã‚’æŒ‡å®šã—ã¦ã„ãªã„å ´åˆ:default_layoutã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹ã“ã¨" do
     mapper = define_layout do
       col :f1, 2
     end
     
     rt = mapper.map(%w(12).join, :default_layout)
-    rt.f1.should == "12"
+    expect(rt.f1).to eq "12"
   end
   
-  it "‚ ‚éƒŒƒCƒAƒEƒg‚Å•Ê‚ÌƒŒƒCƒAƒEƒg(ˆÈ‰ºƒTƒuƒŒƒCƒAƒEƒg)‚ðŽg‚¦‚é‚±‚Æ" do
+  it "ã‚ã‚‹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã§åˆ¥ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ(ä»¥ä¸‹ã‚µãƒ–ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ)ã‚’ä½¿ãˆã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f1, 2
@@ -67,11 +66,11 @@ describe FixedLayoutMapper::Mapper do
       col :f, :layout1
     end
     rt = mapper.map(%w(12 3).join)
-    rt.f.f1.should == "12"
-    rt.f.f2.should == "3"
+    expect(rt.f.f1).to eq "12"
+    expect(rt.f.f2).to eq "3"
   end
   
-  it "ƒTƒuƒŒƒCƒAƒEƒg‚Ì”z—ñ‚à’è‹`‚Å‚«‚é‚±‚Æ" do
+  it "ã‚µãƒ–ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®é…åˆ—ã‚‚å®šç¾©ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f1, 2
@@ -81,13 +80,13 @@ describe FixedLayoutMapper::Mapper do
       col :f, [:layout1, :layout1]
     end
     rt = mapper.map(%w(12 3 ab c).join)
-    rt.f[0].f1.should == "12"
-    rt.f[0].f2.should == "3"
-    rt.f[1].f1.should == "ab"
-    rt.f[1].f2.should == "c"
+    expect(rt.f[0].f1).to eq "12"
+    expect(rt.f[0].f2).to eq "3"
+    expect(rt.f[1].f1).to eq "ab"
+    expect(rt.f[1].f2).to eq "c"
   end
   
-  it "”z—ñ‚É‚ÍƒTƒCƒY‚Å‚àƒTƒuƒŒƒCƒAƒEƒg‚Å‚àŽw’è‚Å‚«‚é‚±‚Æ" do
+  it "é…åˆ—ã«ã¯ã‚µã‚¤ã‚ºã§ã‚‚ã‚µãƒ–ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã§ã‚‚æŒ‡å®šã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f1, 2
@@ -97,13 +96,13 @@ describe FixedLayoutMapper::Mapper do
       col :f, [:layout1, 1, 2]
     end
     rt = mapper.map(%w(12 3 a bc).join)
-    rt.f[0].f1.should == "12"
-    rt.f[0].f2.should == "3"
-    rt.f[1].should == "a"
-    rt.f[2].should == "bc"
+    expect(rt.f[0].f1).to eq "12"
+    expect(rt.f[0].f2).to eq "3"
+    expect(rt.f[1]).to eq "a"
+    expect(rt.f[2]).to eq "bc"
   end
   
-  it "•¡”‚ÌƒŒƒCƒAƒEƒg‚ð’è‹`‚Å‚«‚é‚±‚Æ" do
+  it "è¤‡æ•°ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f1, 1
@@ -114,13 +113,13 @@ describe FixedLayoutMapper::Mapper do
       end
     end
     rt = mapper.map(%w(1).join, :layout1)
-    rt.f1.should == "1"
+    expect(rt.f1).to eq "1"
     
     rt = mapper.map(%w(ab).join, :layout2)
-    rt.f2.should == "ab"
+    expect(rt.f2).to eq "ab"
   end
   
-  it "•ÏŠ·Žž‚ÉƒAƒNƒVƒ‡ƒ“‚ð’è‹`‚µ‚½ê‡‚»‚Ì–ß‚è’l‚Åƒ}ƒbƒsƒ“ƒO‚³‚ê‚é‚±‚Æ" do
+  it "å¤‰æ›æ™‚ã«ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å®šç¾©ã—ãŸå ´åˆãã®æˆ»ã‚Šå€¤ã§ãƒžãƒƒãƒ”ãƒ³ã‚°ã•ã‚Œã‚‹ã“ã¨" do
     mapper = define_layout do
       col :f1, 2 do |v|
         v + v
@@ -128,26 +127,26 @@ describe FixedLayoutMapper::Mapper do
     end
     
     rt = mapper.map(%w(12).join, :default_layout)
-    rt.f1.should == "1212"
+    expect(rt.f1).to eq "1212"
   end
   
-  it "ƒŒƒ“ƒOƒXŽw’è‚ÌƒŒƒCƒAƒEƒg‚ÌƒŒƒ“ƒOƒX‚ªŽæ“¾‚Å‚«‚é‚±‚Æ" do
+  it "ãƒ¬ãƒ³ã‚°ã‚¹æŒ‡å®šã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ãƒ¬ãƒ³ã‚°ã‚¹ãŒå–å¾—ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       col :f1, 2 
     end
     
-    mapper.get_layout.length.should == 2
+    expect(mapper.get_layout.length).to eq 2
   end
   
-  it "”z—ñŽw’è‚ÌƒŒƒCƒAƒEƒg‚ÌƒŒƒ“ƒOƒX‚ªŽæ“¾‚Å‚«‚é‚±‚Æ" do
+  it "é…åˆ—æŒ‡å®šã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ãƒ¬ãƒ³ã‚°ã‚¹ãŒå–å¾—ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       col :f1, [1, 2, 3]
     end
     
-    mapper.get_layout.length.should == 6
+    expect(mapper.get_layout.length).to eq 6
   end
   
-  it "ƒTƒuƒŒƒCƒAƒEƒgŽw’è‚ÌƒŒƒCƒAƒEƒg‚ÌƒŒƒ“ƒOƒX‚ªŽæ“¾‚Å‚«‚é‚±‚Æ" do
+  it "ã‚µãƒ–ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆæŒ‡å®šã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ãƒ¬ãƒ³ã‚°ã‚¹ãŒå–å¾—ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f, 1
@@ -161,81 +160,82 @@ describe FixedLayoutMapper::Mapper do
       col :f2, :layout2
     end
     
-    mapper.get_layout.length.should == 4
+    expect(mapper.get_layout.length).to eq 4
   end
   
-  it "”z—ñ+ƒTƒuƒŒƒCƒAƒEƒgŽw’è‚ÌƒŒƒCƒAƒEƒg‚ÌƒŒƒ“ƒOƒX‚ªŽæ“¾‚Å‚«‚é‚±‚Æ" do
+  it "é…åˆ—+ã‚µãƒ–ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆæŒ‡å®šã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ãƒ¬ãƒ³ã‚°ã‚¹ãŒå–å¾—ã§ãã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1 do
         col :f, 1
       end
       col :f1, [10, :layout1, 1]
     end
-    mapper.get_layout.length.should == 12
+    expect(mapper.get_layout.length).to eq 12
   end
   
-  it "ƒŒƒCƒAƒEƒg‚ÉƒŒƒ“ƒOƒX§–ñ(­‚È‚­‚Æ‚àƒf[ƒ^‚Ì‚Ù‚¤‚ª’·‚¢)‚ðŽw’è‚³‚ê‚½ê‡ƒf[ƒ^‚ÌƒŒƒ“ƒOƒX‚Ì•û‚ª’·‚­‚Ä‚àƒGƒ‰[‚É‚È‚ç‚È‚¢‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ãƒ¬ãƒ³ã‚°ã‚¹åˆ¶ç´„(å°‘ãªãã¨ã‚‚ãƒ‡ãƒ¼ã‚¿ã®ã»ã†ãŒé•·ã„)ã‚’æŒ‡å®šã•ã‚ŒãŸå ´åˆãƒ‡ãƒ¼ã‚¿ã®ãƒ¬ãƒ³ã‚°ã‚¹ã®æ–¹ãŒé•·ãã¦ã‚‚ã‚¨ãƒ©ãƒ¼ã«ãªã‚‰ãªã„ã“ã¨" do
     mapper = define_layout do
       layout :layout1, FixedLayoutMapper::LENGTH_CONDITION_ALLOW_LONG do
         col :f, 2
       end
     end
     rt = mapper.map("12345", :layout1)
-    rt.f.should == "12"
+    expect(rt.f).to eq "12"
   end
 
-  it "ƒŒƒCƒAƒEƒg‚ÉƒŒƒ“ƒOƒX§–ñ(­‚È‚­‚Æ‚àƒf[ƒ^‚Ì‚Ù‚¤‚ª’·‚¢)‚ðŽw’è‚³‚ê‚½ê‡ƒf[ƒ^‚ÌƒŒƒ“ƒOƒX‚Ì•û‚ª’Z‚¢ê‡—áŠO‚ª”­¶‚·‚é‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ãƒ¬ãƒ³ã‚°ã‚¹åˆ¶ç´„(å°‘ãªãã¨ã‚‚ãƒ‡ãƒ¼ã‚¿ã®ã»ã†ãŒé•·ã„)ã‚’æŒ‡å®šã•ã‚ŒãŸå ´åˆãƒ‡ãƒ¼ã‚¿ã®ãƒ¬ãƒ³ã‚°ã‚¹ã®æ–¹ãŒçŸ­ã„å ´åˆä¾‹å¤–ãŒç™ºç”Ÿã™ã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1, FixedLayoutMapper::LENGTH_CONDITION_ALLOW_LONG do
         col :f, 2
       end
     end
-    proc {
+    expect {
       mapper.map("1", :layout1)
-    }.should raise_error
+    }.to raise_error("byte length is too short")
   end
   
-  it "ƒŒƒCƒAƒEƒg‚ÉƒŒƒ“ƒOƒX§–ñ(ƒf[ƒ^’·‚³‚Æ“¯‚¶)‚ðŽw’è‚³‚ê‚½ê‡ƒf[ƒ^‚ÌƒŒƒ“ƒOƒX‚Ì•û‚ª’·‚¢‚ÆƒGƒ‰[‚É‚È‚é‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ãƒ¬ãƒ³ã‚°ã‚¹åˆ¶ç´„(ãƒ‡ãƒ¼ã‚¿é•·ã•ã¨åŒã˜)ã‚’æŒ‡å®šã•ã‚ŒãŸå ´åˆãƒ‡ãƒ¼ã‚¿ã®ãƒ¬ãƒ³ã‚°ã‚¹ã®æ–¹ãŒé•·ã„ã¨ã‚¨ãƒ©ãƒ¼ã«ãªã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1, FixedLayoutMapper::LENGTH_CONDITION_STRICT do
         col :f, 2
       end
     end
-    proc {
+
+    expect {
       mapper.map("12345", :layout1)
-    }.should raise_error
+    }.to raise_error("byte length is invalid")
   end
   
-  it "ƒŒƒCƒAƒEƒg‚ÉƒŒƒ“ƒOƒX§–ñ(ƒf[ƒ^’·‚³‚Æ“¯‚¶)‚ðŽw’è‚³‚ê‚½ê‡ƒf[ƒ^‚ÌƒŒƒ“ƒOƒX‚Ì•û‚ª’Z‚¢‚ÆƒGƒ‰[‚É‚È‚é‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ãƒ¬ãƒ³ã‚°ã‚¹åˆ¶ç´„(ãƒ‡ãƒ¼ã‚¿é•·ã•ã¨åŒã˜)ã‚’æŒ‡å®šã•ã‚ŒãŸå ´åˆãƒ‡ãƒ¼ã‚¿ã®ãƒ¬ãƒ³ã‚°ã‚¹ã®æ–¹ãŒçŸ­ã„ã¨ã‚¨ãƒ©ãƒ¼ã«ãªã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1, FixedLayoutMapper::LENGTH_CONDITION_STRICT do
         col :f, 2
       end
     end
-    proc {
+    expect {
       mapper.map("1", :layout1)
-    }.should raise_error
+    }.to raise_error("byte length is invalid")
   end
   
-  it "ƒŒƒCƒAƒEƒg‚ÉƒŒƒ“ƒOƒX§–ñ(ƒf[ƒ^’·‚³‚Æ“¯‚¶)‚ðŽw’è‚³‚ê‚½ê‡ƒf[ƒ^‚ÌƒŒƒ“ƒOƒX‚Æ“¯‚¶ê‡‚ÍƒGƒ‰[‚ª”­¶‚µ‚È‚¢‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ãƒ¬ãƒ³ã‚°ã‚¹åˆ¶ç´„(ãƒ‡ãƒ¼ã‚¿é•·ã•ã¨åŒã˜)ã‚’æŒ‡å®šã•ã‚ŒãŸå ´åˆãƒ‡ãƒ¼ã‚¿ã®ãƒ¬ãƒ³ã‚°ã‚¹ã¨åŒã˜å ´åˆã¯ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ãªã„ã“ã¨" do
     mapper = define_layout do
       layout :layout1, FixedLayoutMapper::LENGTH_CONDITION_STRICT do
         col :f, 2
       end
-    end
+  end
     
     rt = mapper.map("12", :layout1)
-    rt.f.should == "12"
+    expect(rt.f).to eq "12"
   end
   
-  it "ƒŒƒCƒAƒEƒg‚ÉƒŒƒ“ƒOƒX§–ñ(ƒf[ƒ^’·‚³‚æ‚è‚Í’·‚¢)‚ðŽw’è‚³‚ê‚½ê‡ƒf[ƒ^‚ÌƒŒƒ“ƒOƒX‚Ì•û‚ª’Z‚¢‚ÆƒGƒ‰[‚É‚È‚é‚±‚Æ" do
+  it "ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«ãƒ¬ãƒ³ã‚°ã‚¹åˆ¶ç´„(ãƒ‡ãƒ¼ã‚¿é•·ã•ã‚ˆã‚Šã¯é•·ã„)ã‚’æŒ‡å®šã•ã‚ŒãŸå ´åˆãƒ‡ãƒ¼ã‚¿ã®ãƒ¬ãƒ³ã‚°ã‚¹ã®æ–¹ãŒçŸ­ã„ã¨ã‚¨ãƒ©ãƒ¼ã«ãªã‚‹ã“ã¨" do
     mapper = define_layout do
       layout :layout1, FixedLayoutMapper::LENGTH_CONDITION_ALLOW_LONG do
         col :f, 2
       end
     end
-    proc {
+    expect {
       mapper.map("1", :layout1)
-    }.should raise_error
+    }.to raise_error("byte length is too short")
   end
 end
